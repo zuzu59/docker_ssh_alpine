@@ -1,38 +1,46 @@
-# docker_ssh_terminator_alpine
-Petit container Docker pour faire tourner un terminal Terminator et l'utiliser en ssh, quand on ne peut pas avoir de Terminator sur sa machine, comme sur un MAC par exemple.
+# docker_ssh_alpine
+Juste un petit container Alpine avec possibilité de se *connecter en ssh* dessus :-)
 
-zf211125.0905
+zf211125.0905, zf221113.1000
 
 
 ## Buts
-Souvent quand on travaille avec plusieurs serveurs ou *nodes*, on aimerait exécuter la même commande sur plusieurs machines en même temps. Le terminal **Terminator** le permet de le faire très facilement.
+Il peut-être intéressant d'avoir un back à sable Linux pour faire différents tests !<br>
+Ce petit container le permet.
 
-Le problème, c'est que sur MAC OS, il n'existe PAS !
-
-Pour cela, il y a ce petit container Docker qui est une sorte de machine Linux avec un Terminator d'installé.
-
-On accède, de manière transparente via *ssh* à ce container et généralement tous nos *credentials* et *configurations* ssh devraient nous *suivre* avec.
+On accède à ce container via *ssh*.
 
 
 ## Prérequis
-Il faut que sur sa machine il existe un serveur X11 comme XQuartz par exemple !
+Il faut que Docker tourne sur sa machine !
 
 
 ## Utilisation
-1. Vérifier que XQuartz est bien installé sur le MAC ?
-1. Puis faire:
+1. Faire:
 
   ```
   ./start.sh
   ```
-1. On doit alors se trouver à l'intérieur du container Docker !<br>
-Pour continuer avec Terminator, bien lire ce qui est indiqué dans la console !
+1. Après on donne le password pour l'utilisateur **root** que l'on va utiliser par la suite
 
+1. On peut alors se connecter au container Alipine via ssh avec:
 
+  ```
+  ssh root@localhost -p 22222
+  ```
 
-## Choses encore à faire !
+## Pour arrêter !
+Simplement faire:
+  ```
+  ./stop.sh
+  ```
 
-### Installation de openshift-cli 
-Il faudra encore ajouter les commandes **oc** dans l'image Docker
+## Pour tout effacer !
+Une fois après avoir arrêté le container, on peut purger toute l'installation avec:
+  ```
+  ./purge.sh
+  ```
+**ATTENTION:**<br>
+Ceci va **effacer tous les containers qui ne tournent pas** en ce moment.<br>
+Donc il faut faire très **attention avec d'autres containers éteints !**
 
-https://github.com/saily/openshift-cli
